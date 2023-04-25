@@ -1,31 +1,24 @@
-if (process.env.NODE_ENV != 'production') {
-    require('dotenv').config()
-}
+const db = require('./config/db');
 
-const express = require("express");
-const path = require("path");
-const bodyParse = require("body-parser");
-const mongoose = require("mongoose");
-const exphbs = require("express-handlebars").engine; 
+db.connect();
+
+const express = require('express');
+const path = require('path');
+const bodyParse = require('body-parser');
+
+const exphbs = require('express-handlebars').engine; 
 const ObjectId = require('mongodb').ObjectId;
 
 const app = express();
+const port = 5000;
+
+const route = require('./routes');
 
 app.use(bodyParse.json());
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParse.urlencoded({
     extended: true
 }));
-
-mongoose.connect(process.env.DATABASE_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
-
-var db = mongoose.connection;
-
-db.on('error', () => console.log("error in connecting database"));
-db.once('open', () => console.log("Connected to Database"));
 
 app.engine('hbs', exphbs({
     extname: '.hbs'
@@ -33,3 +26,7 @@ app.engine('hbs', exphbs({
 
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
+
+route(app);
+
+app.listen(port, () => console.log(`Listening on ${port}`));
