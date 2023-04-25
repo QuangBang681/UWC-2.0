@@ -74,6 +74,7 @@
     font-size: var(--font-size-xl);
 }
 .ng-nhp1 {
+    font-weight: 500;
     position: absolute;
     top: 188px;
     left: 11px;

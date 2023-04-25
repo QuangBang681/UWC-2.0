@@ -1,12 +1,11 @@
 
 <div class="row">
     <div class="col-sm-3">
-        <h2>Danh sách ca</h2>
+        <h1>Danh sách ca</h1>
     </div>
-    <div class="col-sm-2">
+    <div class="col-sm">
         <a href="/task/create" class="btn btn-primary">Tạo ca mới</a>
     </div>
-    
 </div>
 <div>
     <h5>Filter</h5>
@@ -49,8 +48,10 @@
 </table>
 
 <script type="text/javascript">
-    const $ = document.querySelector.bind(document);
-    $('#prefill').datepicker({
-        inline: true
-    });
+    $(function() {
+        $('#filterDay').datepicker({
+            inline: true
+        });
+    })
+    
 </script>

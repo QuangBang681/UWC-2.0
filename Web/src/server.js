@@ -6,7 +6,7 @@ const express = require('express');
 const path = require('path');
 const bodyParse = require('body-parser');
 
-const exphbs = require('express-handlebars').engine; 
+const exphbs = require('express-handlebars'); 
 const ObjectId = require('mongodb').ObjectId;
 
 const app = express();
@@ -20,9 +20,12 @@ app.use(bodyParse.urlencoded({
     extended: true
 }));
 
-app.engine('hbs', exphbs({
+const hbsHelpers = exphbs.create({
+    helpers: require("./helpers/handlebars.js").helpers,
     extname: '.hbs'
-}));
+});
+
+app.engine('hbs', hbsHelpers.engine);
 
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));

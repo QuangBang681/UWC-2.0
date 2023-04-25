@@ -1,0 +1,21 @@
+<h1>Nhân viên</h1>
+<table class="table" style="margin-top:20px">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Tên</th>
+            <th scope="col">Vai trò</th>
+            <th scope="col">Khác</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each employees}}
+        <tr>
+            <th scope="col">{{math @index "+" 1}}</th>
+            <th scope="col">{{this.name}}</th>
+            <th scope="col">{{position}}</th>
+            <th scope="col"></th>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

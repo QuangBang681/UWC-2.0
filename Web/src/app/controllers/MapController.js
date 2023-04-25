@@ -1,7 +1,9 @@
 class MapController {
     // [GET] /
     index(req, res) {
-        res.render('map');
+        res.render('map', {
+            mapActive: true
+        });
     }
 }
 

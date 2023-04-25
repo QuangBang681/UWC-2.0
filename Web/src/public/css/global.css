@@ -9,6 +9,8 @@ body {
     --font-poppins: Poppins;
     --font-roboto: Roboto;
 
+    --bs-body-font-family: 'Nunito';
+
     /* font sizes */
     --font-size-xl: 20px;
     --font-size-base: 16px;

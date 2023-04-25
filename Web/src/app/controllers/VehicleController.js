@@ -1,7 +1,9 @@
 class VehicleController {
     // [GET] /
     index(req, res) {
-        res.render('vehicle');
+        res.render('vehicle', {
+            vehicleActive: true
+        });
     }
 }
 
