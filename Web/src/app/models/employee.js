@@ -8,9 +8,9 @@ const EmployeeSchema = new mongoose.Schema(
         name: {type: String, required: true},
         position: {type: String, required: true},
         email: {type: String, required: true, unique: true},
-        phone_number: {type: String, required: true, unique: true}
+        phone_number: {type: String, required: true, unique: true},
     },
     {collection: 'employee'}
 );
 
-module.exports = mongoose.model('employee', EmployeeSchema);
+module.exports = mongoose.model('Employee', EmployeeSchema);

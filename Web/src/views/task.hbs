@@ -1,52 +1,52 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            <h1>Danh sách ca</h1>
+        </div>
+        <div class="col-sm">
+            <a href="/task/create" class="btn btn-outline-success float-right">Tạo ca mới</a>
+        </div>
+    </div>
+    <div>
+        <h5>Filter</h5>
+    </div>
 
-<div class="row">
-    <div class="col-sm-3">
-        <h1>Danh sách ca</h1>
-    </div>
-    <div class="col-sm">
-        <a href="/task/create" class="btn btn-primary">Tạo ca mới</a>
-    </div>
+    <form method="get">
+        <div class="form-row">
+            <div class="form-group col-md-3 mr-sm-5">
+                <input name="date" type="text" class="form-control" id="filterDay" placeholder="Chọn ngày">
+            </div>
+            <div class="form-group col-md-3 mr-sm-5">
+                <select name="state" id="inputState" class="form-control">
+                    <option selected>Trạng thái</option>
+                    <option value="0">Chưa diễn ra</option>
+                    <option value="1">Đang diễn ra</option>
+                    <option value="2">Kết thúc</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-3 mr-sm-5">
+                <input name="id" type="text" class="form-control" id="filterID" placeholder="ID Nhân viên">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-outline-success">Filter</button>  
+    </form>
+
+    <table class="table mt-4">
+        <thead class="bg-light">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Ngày</th>
+                <th scope="col">Giờ bắt đầu</th>
+                <th scope="col">Giờ kết thúc</th>
+                <th scope="col">Trạng thái</th>
+                <th scope="col">Đã xong</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+    </table>
 </div>
-<div>
-    <h5>Filter</h5>
-</div>
-
-<form method="get">
-    <div class="form-row">
-        <div class="form-group col-md-3 mr-sm-5">
-            <input name="date" type="text" class="form-control" id="filterDay" placeholder="Chọn ngày">
-        </div>
-        <div class="form-group col-md-3 mr-sm-5">
-            <select name="state" id="inputState" class="form-control">
-                <option selected>Trạng thái</option>
-                <option value="0">Chưa diễn ra</option>
-                <option value="1">Đang diễn ra</option>
-                <option value="2">Kết thúc</option>
-            </select>
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-3 mr-sm-5">
-            <input name="id" type="text" class="form-control" id="filterID" placeholder="ID Nhân viên">
-        </div>
-    </div>
-    <button type="submit" class="btn btn-primary">Filter</button>  
-</form>
-
-<table class="table" style="margin-top:20px">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Ngày</th>
-            <th scope="col">Giờ bắt đầu</th>
-            <th scope="col">Giờ kết thúc</th>
-            <th scope="col">Trạng thái</th>
-            <th scope="col">Đã xong</th>
-            <th scope="col"></th>
-        </tr>
-    </thead>
-</table>
-
 <script type="text/javascript">
     $(function() {
         $('#filterDay').datepicker({

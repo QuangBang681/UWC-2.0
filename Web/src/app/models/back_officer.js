@@ -11,4 +11,4 @@ const BackOfficerSchema = new mongoose.Schema(
     {collection: 'backofficer'}
 );
 
-module.exports = mongoose.model('backofficer', BackOfficerSchema);
+module.exports = mongoose.model('BackOfficer', BackOfficerSchema);

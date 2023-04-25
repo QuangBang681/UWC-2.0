@@ -5,7 +5,7 @@ db.connect();
 const express = require('express');
 const path = require('path');
 const bodyParse = require('body-parser');
-
+const methodOverride = require('method-override');
 const exphbs = require('express-handlebars'); 
 const ObjectId = require('mongodb').ObjectId;
 
@@ -19,6 +19,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParse.urlencoded({
     extended: true
 }));
+
+app.use(methodOverride('_method'))
 
 const hbsHelpers = exphbs.create({
     helpers: require("./helpers/handlebars.js").helpers,

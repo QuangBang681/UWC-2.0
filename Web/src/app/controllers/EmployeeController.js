@@ -5,13 +5,14 @@ class EmployeeController {
         employee.find()
             .then(employeesOb => {
                 const employees = employeesOb.map(employee => {
-                    var positonVal = 0;
+                    var collector = false;
                     if (employee.position === 'collector') {
-                        positonVal = 1;
+                        collector = true;
                     }
                     return {
+                        _id: employee._id,
                         name: employee.name,
-                        position: positonVal
+                        collector: collector
                     }
                 })
                 res.render('employee', {
@@ -20,7 +21,10 @@ class EmployeeController {
                 });
             })
             .catch(err => console.log(err));
-        
+    }
+
+    makeChanges(req, res) {
+        res.json(req.body);
     }
 }
 
