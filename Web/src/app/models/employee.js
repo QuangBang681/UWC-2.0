@@ -3,8 +3,6 @@ const { ObjectId } = require('mongodb');
 
 const EmployeeSchema = new mongoose.Schema(
     {
-        _id: {type: ObjectId, required: true},
-
         name: {type: String, required: true},
         position: {type: String, required: true},
         email: {type: String, required: true, unique: true},

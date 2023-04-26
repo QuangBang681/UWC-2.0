@@ -1,7 +1,7 @@
 const employee = require('../models/employee');
 
 class EmployeeController {
-    index(req, res) {
+    index(req, res, next) {
         employee.find()
             .then(employeesOb => {
                 const employees = employeesOb.map(employee => {
@@ -20,7 +20,7 @@ class EmployeeController {
                     employees: employees
                 });
             })
-            .catch(err => console.log(err));
+            .catch(next);
     }
 
     makeChanges(req, res) {

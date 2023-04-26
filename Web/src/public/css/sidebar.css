@@ -118,6 +118,7 @@ a:focus {
     color: #0DB05D;
     background: #EBF8F2;
     border-radius: 8px;
+    font-weight: 700;
 }
 
 #sidebar ul li div {

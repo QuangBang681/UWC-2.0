@@ -11,7 +11,7 @@ var register = function(Handlebars) {
                 "/": lvalue / rvalue,
                 "%": lvalue % rvalue
             }[operator];
-        }
+        },
     };
 
     if (Handlebars && typeof Handlebars.registerHelper === "function") {

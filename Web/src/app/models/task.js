@@ -4,11 +4,10 @@ const { EmployeeSchema } = require('./employee');
 
 const TaskSchema = new mongoose.Schema(
     {
-        _id: {type: ObjectId, required: true},
-
         date: {type: Date, required: true},
-        time_start: {type: Date, required: true},
-        time_end: {type: Date, required: true},
+        time_start: {type: String, required: true},
+        time_end: {type: String, required: true},
+        state: {type: Number, required: true},
         assignment: [{type: ObjectId, ref: 'Employee'}]
     },
     {collection: 'task'}
