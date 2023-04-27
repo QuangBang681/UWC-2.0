@@ -1,3 +1,14 @@
+<style>
+    .filter {
+        box-sizing: border-box;
+        background: #FFFFFF;
+        border: 1px solid #ADADAD;
+        border-radius: 9px;
+        height: 50px;
+        text-indent: 10px;
+    }
+</style>
+
 <div class="container">
     <div class="row">
         <div class="col-sm-3">
@@ -5,6 +16,7 @@
         </div>
         <div class="col-sm">
             <button type="button" class="btn btn-outline-success float-right" data-toggle="modal" data-target="#create-task-modal">
+                <i class="bi bi-check2-circle"></i>
                 Tạo ca mới
             </button>
         </div>
@@ -16,10 +28,10 @@
     <form method="get">
         <div class="form-row">
             <div class="form-group col-md-3 mr-sm-5">
-                <input name="date" type="text" class="form-control filter-day" placeholder="Chọn ngày">
+                <input name="date" type="text" class="form-control filter-day filter" placeholder="Chọn ngày">
             </div>
             <div class="form-group col-md-3 mr-sm-5">
-                <select name="state" id="inputState" class="form-control">
+                <select name="state" id="inputState" class="form-control filter">
                     <option value="" selected>Trạng thái</option>
                     <option value="0">Chưa diễn ra</option>
                     <option value="1">Đang diễn ra</option>
@@ -27,12 +39,12 @@
                 </select>
             </div>
             <div class="form-group col-md-3 mr-sm-5">
-                <button type="submit" class="btn btn-success h-100">Filter</button>  
+                <button type="submit" class="btn btn-success h-100" style="width: 120px; border-radius: 10px;">Filter</button>  
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-3 mr-sm-5">
-                <input name="id_employee" type="text" class="form-control" id="filterID" placeholder="ID Nhân viên">
+                <input name="id_employee" type="text" class="form-control filter" id="filterID" placeholder="ID Nhân viên">
             </div>
         </div>
     </form>
@@ -132,7 +144,7 @@
         <div class="modal-content">
             <div class="modal-body">
                 <div class="text-center">
-                    <i class="bi bi-person-check-fill bi-lg" style="font-size:36px;"></i>
+                    <i class="bi bi-person-check-fill" style="font-size:36px;"></i>
                 </div>
                 <h5 class="text-center mt-3">Bạn có chắc chắn muốn xóa ca này?</h5>
                 <div class="form-row mt-3">
