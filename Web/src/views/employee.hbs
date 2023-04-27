@@ -25,7 +25,7 @@
                         <th scope="row">{{math @index "+" 1}}</th>
                         <th>{{this.name}}</th>
                         <th>
-                            <select name="position" class="form-control form-select" aria-label=".form-select-lg">
+                            <select name="{{this._id}}" class="form-control form-select" aria-label=".form-select-lg">
                                 {{#if this.collector}}
                                     <option value="1" selected>Collector</option>
                                     <option value="0">Janitor</option>
