@@ -9,6 +9,9 @@
         height: 50px;
         color: #808080;
     }
+    .employee-hover:hover {
+        background: #F2F3F5;
+    }
 </style>
 <div class="row" style="margin-left: 14.6px">
     <a href="javascript:history.back()">
@@ -19,34 +22,89 @@
     </div>
 </div>
 <div class="container mt-xl-5">
-    <form>
-        <div class="row">
-            <div class="col">
-                <h2>Chọn phương tiện</h2>
-            </div>
-            <div class="col">
-                <h2>Chọn tài xế</h2>
+    <div class="row">
+        <div class="col">
+            <h2>Chọn phương tiện</h2>
+        </div>
+        <div class="col">
+            <h2>Chọn tài xế</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <select name="vehicle" class="input-assign" aria-label=".form-select-lg">
+                <option value="" selected>Chọn phương tiện</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <div class="dropdown">
+                <input name="employee" type="text" class="form-cotrol text-left input-assign" id="employeeMenuButton" placeholder="Chọn tài xế" data-toggle="dropdown" readonly>
+                <div class="dropdown-menu w-75" aria-labelledby="employeeMenuButton" style="height:300px;overflow-y:scroll;overflow-x:hidden;">
+                    {{#each employees}}
+                        <div id-data="{{this._id}}" name-data="{{this.name}}" class="row employee-hover" style="margin:10px;border-radius: 10px;">
+                            <div class="pl-md-5 pt-md-2">
+                                <i class="bi bi-person-circle" style="font-size:36px;"></i>
+                            </div>
+                            <div class="col-lg pt-md-2">
+                                <div style="font-size: 18px; font-weight: 700;">{{this.name}}</div>
+                                <div style="font-size: 14px; font-weight: 400;">Bằng lái loại{{this.license}}</div>
+                            </div>
+                        </div>
+                    {{/each}}
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="form-group col-md-6">
-                <select class="form-select input-assign" aria-label=".form-select-lg">
-                    <option selected>Chọn phương tiện</option>
-                </select>
-            </div>
-            <div class="form-group col-md-6">
-                <select class="form-select input-assign" aria-label=".form-select-lg">
-                    <option selected>Chọn phương tiện</option>
-                </select>
+    </div>
+    <div class="row" style="height:40vh">
+        <div class="col">    
+        
+        </div>
+        <div class="col" style="">
+            <div id="choose-place-holder" class="row h-100 align-items-center" style="display:none;margin-left:10px;">
+                <div class="row align-items-center" style="background:content-box #F2F3F5;border-radius:10px;">
+                    <div class="pl-md-4">
+                        <i class="bi bi-person-square" style="font-size: 72px"></i>
+                    </div>
+                    <div class="col-xl">
+                        <div id="name-choose-placeholder" style="font-size: 18px; font-weight: 700;"></div>
+                        <div id="id-choose-placeholder" style="font-size: 14px; font-weight: 400;"></div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="row" style="margin-top: 300px;">
-            <div class="col-sm"></div>
-            <div class="col-sm">
-                <button type="button" class="btn btn-outline-success float-right">
-                    Hoàn tất
-                </button>
-            </div>
+    </div>
+    <div class="row">
+        <div class="col-sm"></div>
+        <div class="col-sm">
+            <button type="button" class="btn btn-outline-success float-right" id="btn-assign-vehicle">
+                Hoàn tất
+            </button>
         </div>
-    </form>
+    </div>
 </div>
+<form id="assign-vehicle-form" method="post"></form>
+<script>
+    $(function() {
+        var chosenEmployeeId;
+        var chosenVehicleId;
+        {{!-- var chosenEmployeeName; --}}
+        var assignVehicleForm = document.forms['assign-vehicle-form'];
+        var assginVehicleButton = document.getElementById('btn-assign-vehicle');
+        $('.employee-hover').toArray().forEach(function(employee_input) {
+            employee_input.addEventListener('click', function(e) {
+                chosenEmployeeId = employee_input.getAttribute('id-data');
+                document.getElementById('name-choose-placeholder').textContent = `Tên: ${employee_input.getAttribute('name-data')}`;
+                document.getElementById('id-choose-placeholder').textContent = `ID: ${chosenEmployeeId}`;
+                document.getElementById('choose-place-holder').style.removeProperty('display');
+            })  
+        });
+
+        assginVehicleButton.onclick = function() {
+            if (!chosenEmployeeId || !chosenVehicleId) {
+            } else {
+                assignVehicleForm.action = '/vehicle/assign/' + chosenVehicleId + '/' + chosenEmployeeId + '?_method=patch';
+                assignVehicleForm.submit();
+            }
+        }
+    })
+</script>
