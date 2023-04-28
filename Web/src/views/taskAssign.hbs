@@ -62,11 +62,14 @@
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="get">
+            <form method="post">
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="form-group col-md">
-                            <input name="" type="text" class="form-control" placeholder="MCP ID">
+                            <select name="mcp" id="mcp" class="form-control">
+                                <option value="">MCP ID</option>
+                                
+                            </select>
                         </div>
                     </div>
                     <div class="form-row handle-duplicate-empolyee">
@@ -121,6 +124,7 @@
                 $(`#employee-assigned option[value = "${previousLeader}"]`).removeClass("optInvisible");
             }
             previousLeader = this.value;
+            console.log(previousLeader);
             $(`#employee-assigned option[value = "${this.value}"]`).addClass("optInvisible");
         })
         $('#employee-assigned').on("select2:select select2:unselect", function (e) {

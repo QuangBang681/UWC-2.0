@@ -116,7 +116,7 @@ class TaskController {
         }
     }
 
-    // [GET] / :id / assign
+    // [GET] / :id / assign (page)
     assign(req, res, next) {
         // mcp.find()
         //     .then()
@@ -132,6 +132,25 @@ class TaskController {
                 })
             })
         
+    }
+
+    async assignment(req, res, next) {
+        var mcp = req.body.mcp;
+        var leader = req.body.leader;
+        var employee = req.body['employee-assigned'];
+        var taskId = req.params.id;
+        if (!mcp || !leader || !employee) {
+            
+        } else {
+            var taskObj = await task.findById(taskId);
+            taskObj.leader = leader;
+            if (taskObj.assignment) {
+                taskObj.assignment.push(...employee);
+            }
+            taskObj.mcp = mcp;
+            await taskObj.save();
+        }
+        return res.redirect('/task/' + taskId + '/assign');
     }
 }
 

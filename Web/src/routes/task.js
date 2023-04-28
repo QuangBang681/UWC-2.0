@@ -5,7 +5,8 @@ const taskController = require('../app/controllers/TaskController');
 
 router.get('/:id/assign', taskController.assign);
 router.get('/', taskController.index);
-router.post('/', taskController.create)
+router.post('/:id/assign', taskController.assignment);
+router.post('/', taskController.create);
 router.delete('/:id', taskController.destroy);
 router.patch('/:id', taskController.update);
 
