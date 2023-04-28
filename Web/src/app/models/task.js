@@ -8,7 +8,9 @@ const TaskSchema = new mongoose.Schema(
         time_start: {type: String, required: true},
         time_end: {type: String, required: true},
         state: {type: Number, required: true},
-        assignment: [{type: ObjectId, unique: true, ref: 'Employee'}]
+        assignment: [{type: ObjectId, ref: 'Employee'}],
+        leader: {type: ObjectId, ref: 'Employee'},
+        mcp: [{type: ObjectId, ref: 'MCP'}]
     },
     {collection: 'task'}
 );

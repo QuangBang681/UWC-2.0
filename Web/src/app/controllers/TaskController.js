@@ -1,4 +1,5 @@
 const task = require('../models/task');
+const employee = require('../models/employee');
 
 function convertStrToTime(str) {
     var hour = str.slice(0, 2);
@@ -113,6 +114,24 @@ class TaskController {
                 })
                 .catch(next)
         }
+    }
+
+    // [GET] / :id / assign
+    assign(req, res, next) {
+        // mcp.find()
+        //     .then()
+        employee.find({
+            position: "janitor",
+            assign_MCP: false
+        })
+            .then(employees => {
+                employees = employees.map(employee => employee.toObject());
+                res.render('taskAssign', {
+                    taskActive: true,
+                    employees: employees,
+                })
+            })
+        
     }
 }
 

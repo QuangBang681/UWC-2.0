@@ -3,7 +3,7 @@ const router = express.Router();
 
 const taskController = require('../app/controllers/TaskController');
 
-// router.get('/search', taskController.filter);
+router.get('/:id/assign', taskController.assign);
 router.get('/', taskController.index);
 router.post('/', taskController.create)
 router.delete('/:id', taskController.destroy);

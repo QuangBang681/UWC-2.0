@@ -37,6 +37,7 @@ class VehicleController {
         
     }
 
+    // [GET] / assign /
     assign(req, res, next) {
         vehicle.find({
             type: 'collecting',
@@ -61,6 +62,7 @@ class VehicleController {
             .catch(next);
     }
 
+    // [PATCH] / assign / :vehicle_id/ :employee_id
     assignment(req, res, next) {
         vehicle.findByIdAndUpdate(req.params.vehicle_id,{
             state: 0,
@@ -77,6 +79,7 @@ class VehicleController {
             .catch(next);
     }
 
+    // [PATCH] / :id
     async unassignment(req, res, next) {
         const vehicleObj = await vehicle.findById(req.params.id);
         const employeeId = vehicleObj.assign_empolyee;
