@@ -31,7 +31,6 @@ class VehicleController {
                         });
                     })
                     .catch(next);
-                
             })
             .catch(next);
         

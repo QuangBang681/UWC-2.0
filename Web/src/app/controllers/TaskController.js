@@ -1,5 +1,6 @@
 const task = require('../models/task');
 const employee = require('../models/employee');
+const mcp = require('../models/mcp');
 
 function convertStrToTime(str) {
     var hour = str.slice(0, 2);
@@ -87,7 +88,17 @@ class TaskController {
     // [DELETE] / :id
     destroy(req, res, next) {
         task.deleteOne({ _id: req.params.id })
-            .then(() => res.redirect('back'))
+            .then((taskObj) => {
+                employee.findByIdAndUpdate(taskObj.leader, {
+                    assign_MCP: false
+                })
+                taskObj.assignment.forEach((employeeId) => {
+                    employee.findByIdAndUpdate(employeeId, {
+                        assign_MCP: false
+                    })
+                })
+                res.redirect('back')
+            })
             .catch(next);
     }
 
@@ -118,26 +129,35 @@ class TaskController {
 
     // [GET] / :id / assign (page)
     assign(req, res, next) {
-        // mcp.find()
-        //     .then()
-        employee.find({
-            position: "janitor",
-            assign_MCP: false
-        })
-            .then(employees => {
-                employees = employees.map(employee => employee.toObject());
-                res.render('taskAssign', {
-                    taskActive: true,
-                    employees: employees,
-                })
+        task.findById(req.params.id)
+            .then(task => {
+                mcp.findById(task.mcp)
+                    .then(mcp => {
+                        mcp = mcp.toOnject();
+                        employee.find({
+                            position: "janitor",
+                            assign_MCP: false
+                        })
+                            .then(employees => {
+                                employees = employees.map(employee => employee.toObject());
+                                res.render('taskAssign', {
+                                    taskActive: true,
+                                    employees: employees,
+                                    mcp_id: mcp._id,
+                                    mcp_location: mcp.location
+                                })
+                            })
+                            .catch(next);
+                    })
+                    .catch(next);
             })
-        
+            .catch(next);
     }
 
     async assignment(req, res, next) {
         var mcp = req.body.mcp;
         var leader = req.body.leader;
-        var employee = req.body['employee-assigned'];
+        var employees = req.body['employee-assigned'];
         var taskId = req.params.id;
         if (!mcp || !leader || !employee) {
             
@@ -145,10 +165,20 @@ class TaskController {
             var taskObj = await task.findById(taskId);
             taskObj.leader = leader;
             if (taskObj.assignment) {
-                taskObj.assignment.push(...employee);
+                taskObj.assignment.push(...employees);
             }
             taskObj.mcp = mcp;
             await taskObj.save();
+
+            var leaderObj = await employee.findById(leader);
+            leaderObj.assign_MCP = true;
+            await leaderObj.save();
+
+            await employees.forEach(async employeeId => {
+                var employeeObj = await employee.findById(employeeId);
+                employeeObj.assign_MCP = true;
+                await employeeObj.save();
+            })
         }
         return res.redirect('/task/' + taskId + '/assign');
     }
